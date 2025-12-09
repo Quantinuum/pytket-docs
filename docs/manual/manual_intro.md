@@ -90,13 +90,13 @@ If your work is on the topic of specific compilation tasks, it may be more appro
 - ["Phase Gadget Synthesis for Shallow Circuits"](https://arxiv.org/pdf/1906.01734v2) for representing exponentiated Pauli operators in the ZX calculus and their circuit decompositions.
 - ["A Generic Compilation Strategy for the Unitary Coupled Cluster Ansatz"](https://arxiv.org/pdf/2007.10515) for sequencing of terms in Trotterisation and Pauli diagonalisation.
 
-We are also keen for others to benchmark their compilation techniques against us. We recommend checking our [benchmark repository](https://github.com/CQCL/tket_benchmarking) for examples on how to run basic benchmarks with the latest version of `pytket`. Please list the release version of `pytket` with any benchmarks you give, and feel free to get in touch for any assistance needed in setting up fair and representative tests.
+We are also keen for others to benchmark their compilation techniques against us. We recommend checking our [benchmark repository](https://github.com/Quantinuum/tket_benchmarking) for examples on how to run basic benchmarks with the latest version of `pytket`. Please list the release version of `pytket` with any benchmarks you give, and feel free to get in touch for any assistance needed in setting up fair and representative tests.
 
 ## Support
 
 % Github issues
 
-If you spot any bugs or have any feature suggestions, feel free to add to the issues board on our [Github repository](https://github.com/CQCL/tket). We appreciate exact error messages and reproduction steps where possible for bug reports to help us address them quickly.
+If you spot any bugs or have any feature suggestions, feel free to add to the issues board on our [Github repository](https://github.com/Quantinuum/tket). We appreciate exact error messages and reproduction steps where possible for bug reports to help us address them quickly.
 
 % For more specific assistance, e-mail tket-support
 
