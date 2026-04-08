@@ -1,12 +1,13 @@
 name: check docs build
 
 on:
-  pull_request:
+  push:
     branches:
       - main
-  schedule:
-    # 03:00 every Saturday morning
-    - cron: '0 3 * * 6'
+  pull_request:
+    branches:
+      - '**'
+  workflow_dispatch: {}
 
 jobs:
   check:
@@ -22,7 +23,7 @@ jobs:
         uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
-          version: "0.10.9"   # also fixed typo here
+          version: "0.10.9"
 
       - uses: extractions/setup-just@v3
         with:
