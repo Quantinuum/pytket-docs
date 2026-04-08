@@ -13,22 +13,26 @@ jobs:
     name: check docs build
     runs-on: ubuntu-22.04
     steps:
-    uses: actions/checkout@v5
-    with:
-      submodules: true
-      fetch-depth: '0'
-    name: Install uv
-    uses: astral-sh/setup-uv@v7
-    with:
-        enable-cache: true
-        ersion: "0.10.9"
-    uses: extractions/setup-just@v3
-    with:
-      just-version: 1.5.0
-    name: install graphviz
-    run: |
+      - uses: actions/checkout@v5
+        with:
+          submodules: true
+          fetch-depth: '0'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v7
+        with:
+          enable-cache: true
+          version: "0.10.9"   # also fixed typo here
+
+      - uses: extractions/setup-just@v3
+        with:
+          just-version: 1.5.0
+
+      - name: install graphviz
+        run: |
           sudo apt-get update
-          sudo apt-get install graphviz
-    name: build manual and examples
-    run: |
-        just build
+          sudo apt-get install -y graphviz
+
+      - name: build manual and examples
+        run: |
+          just build
