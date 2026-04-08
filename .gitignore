@@ -18,3 +18,6 @@ docs/.jupyter_cache
 c.quip
 c.qasm
 c.tex
+conf.py
+.quip
+_static
