@@ -13,10 +13,10 @@ jobs:
     name: check docs build
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v5
-      with:
-        submodules: true
-        fetch-depth: '0'
+    uses: actions/checkout@v5
+    with:
+      submodules: true
+      fetch-depth: '0'
     name: Install uv
     uses: astral-sh/setup-uv@v7
     with:
@@ -25,12 +25,6 @@ jobs:
     uses: extractions/setup-just@v3
     with:
       just-version: 1.5.0
-    name: Select Python 3.12
-    run: git fetch --depth=1 origin +refs/tags/*:refs/tags/* +refs/heads/*:refs/remotes/origin/*
-    name: Set up Python 3.11
-    uses: actions/setup-python@v6
-    with:
-      python-version: 3.11
     name: install graphviz
     run: |
           sudo apt-get update
