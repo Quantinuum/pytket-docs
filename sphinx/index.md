@@ -34,7 +34,7 @@ from pytket.circuit.display import render_circuit_jupyter
 render_circuit_jupyter(ghz_circ)
 ```
 
-See also the [Circuit construction](../docs/manual/manual_circuit.md)
+See also the [Circuit construction](../sphinx/manual/manual_circuit.md)
 section of the user manual.
 
 ## Build a `Circuit` from a QASM file
@@ -127,7 +127,7 @@ The Hadamard and CX gate are supported operations of the simulator so we
 can run the GHZ circuit without changing any of the operations. For more
 realistic cases a compiler will have to solve for the limited gateset of
 the target backend as well as other backend requirements.
-See the [Running on Backends](../docs/manual/manual_backend.md) section of the user manual and the [backends example notebook](../docs/examples/backends/backends_example.ipynb)
+See the [Running on Backends](../sphinx/manual/manual_backend.md) section of the user manual and the [backends example notebook](../sphinx/examples/backends/backends_example.ipynb)
 for more.
 
 ```{toctree}

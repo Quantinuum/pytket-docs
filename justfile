@@ -1,22 +1,21 @@
 clean:
-    rm -rf docs/jupyter_execute
-    rm -rf docs/.jupyter_cache
-    rm -rf docs/build
+    rm -rf sphinx/jupyter_execute
+    rm -rf sphinx/.jupyter_cache
+    rm -rf sphinx/build
 
 prepare:
-    cp -R docs/pytket-docs-theming/_static docs
-    cp docs/pytket-docs-theming/conf.py docs
-
+    cp -R sphinx/pytket-docs-theming/_static sphinx
+    cp sphinx/pytket-docs-theming/conf.py sphinx
 
 build: prepare
-    cd docs && uv run sphinx-build -b html . build -D html_title="pytket user guide" -W
+    cd sphinx && uv run sphinx-build -b html . build -D html_title="pytket user guide" -W
 
 build-debug: prepare
-    cd docs && uv run sphinx-build -b html . build -D html_title="pytket user guide"
+    cd sphinx && uv run sphinx-build -b html . build -D html_title="pytket user guide"
 
 serve: build-debug
-    npm exec serve docs/build
+    npm exec serve sphinx/build
 
 linkcheck:
-    cd docs && uv run sphinx-build -b linkcheck . build -W
+    cd sphinx && uv run sphinx-build -b linkcheck . build -W
 

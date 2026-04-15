@@ -12,7 +12,7 @@ The docs can be built locally by following these steps
 git clone git@github.com:Quantinuum/pytket-docs.git --recurse-submodules
 ```
 
-If you use `git pull` inside the `docs/pytket-docs-theming` directory, you should be using the latest version of the theming.
+If you use `git pull` inside the `sphinx/pytket-docs-theming` directory, you should be using the latest version of the theming.
 
 2. Next, install the dependencies using poetry
 
