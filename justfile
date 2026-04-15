@@ -14,10 +14,8 @@ build: prepare
 build-debug: prepare
     cd docs && uv run sphinx-build -b html . build -D html_title="pytket user guide"
 
-serve-debug: build-debug
+serve: build-debug
     npm exec serve docs/build
-
-
 
 linkcheck:
     cd docs && uv run sphinx-build -b linkcheck . build -W
