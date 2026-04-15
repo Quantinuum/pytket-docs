@@ -13,7 +13,7 @@ A {py:class}`~pytket.backends.Backend` represents a connection to some co-proces
 
 With the wide variety of {py:class}`~pytket.backends.Backend` s available, they naturally have very different capabilities and limitations. The class is designed to open up this information so that it is easy to examine at runtime and make hardware-dependent choices as needed for maximum performance, whilst providing a basic abstract model that is easy for proof-of-concept testing.
 
-No {py:class}`~pytket.backends.Backend` s are currently provided with the core [pytket](inv:pytket:*:doc#index)) package, but most extension modules will add simulators or devices from the given provider, such as the {py:class}`~pytket.extensions.qiskit.AerBackend` and {py:class}`~pytket.extensions.qiskit.IBMQBackend` with [pytket-qiskit](inv:pytket-qiskit:std:doc#index) or the {py:class}`~pytket.extensions.quantinuum.QuantinuumBackend` with [pytket-quantinuum](inv:pytket-quantinuum:std:doc#index).
+No {py:class}`~pytket.backends.Backend` s are currently provided with the core [pytket](inv:pytket:*:doc#index)) package, but most extension modules will add simulators or devices from the given provider, such as the {py:class}`~pytket.extensions.qiskit.backends.aer.AerBackend` and {py:class}`~pytket.extensions.qiskit.backends.ibm.IBMQBackend` with [pytket-qiskit](inv:pytket-qiskit:std:doc#index) or the {py:class}`~pytket.extensions.quantinuum.QuantinuumBackend` with [pytket-quantinuum](inv:pytket-quantinuum:std:doc#index).
 
 ## Backend Requirements
 
@@ -577,7 +577,7 @@ print(expectation)
 ```
 
 ```{note}
-Currently, only some devices (e.g. those from IBMQ, Quantinuum and Amazon Braket) support a queue model and benefit from this methodology, though more may adopt this in future. The {py:class}`~pytket.extensions.qiskit.AerBackend` simulator and the {py:class}`~pytket.extensions.quantinuum.QuantinuumBackend` can take advantage of batch submission for parallelisation. In other cases, {py:class}`~pytket.backends.Backend.process_circuits` will just loop through each {py:class}`~pytket.circuit.Circuit` in turn.
+Currently, only some devices (e.g. those from IBMQ, Quantinuum and Amazon Braket) support a queue model and benefit from this methodology, though more may adopt this in future. The {py:class}`~pytket.extensions.qiskit.backends.aer.AerBackend` simulator and the {py:class}`~pytket.extensions.quantinuum.QuantinuumBackend` can take advantage of batch submission for parallelisation. In other cases, {py:class}`~pytket.backends.Backend.process_circuits` will just loop through each {py:class}`~pytket.circuit.Circuit` in turn.
 ```
 
 ## Embedding into Qiskit
@@ -757,7 +757,7 @@ asyncio.run(main())
 In some cases you may want to end execution early, perhaps because it is taking too long or you already have all the data you need. You can use the {py:meth}`~pytket.backends.Backend.cancel()` method to cancel the job for a given {py:class}`~pytket.backends.resulthandle.ResultHandle`. This is recommended to help reduce load on the devices if you no longer need to run the submitted jobs.
 
 ```{note}
-Asynchronous submission is currently available with the {py:class}`~pytket.extensions.qiskit.IBMQBackend`, {py:class}`~pytket.extensions.quantinuum.QuantinuumBackend`, {py:class}`BraketBackend` and {py:class}`~pytket.extensions.qiskit.AerBackend`. It will be extended to others in future updates.
+Asynchronous submission is currently available with the {py:class}`~pytket.extensions.qiskit.backends.ibm.IBMQBackend`, {py:class}`~pytket.extensions.quantinuum.QuantinuumBackend`, {py:class}`BraketBackend` and {py:class}`~pytket.extensions.qiskit.backends.aer.AerBackend`. It will be extended to others in future updates.
 ```
 
 ### Persistent Handles
