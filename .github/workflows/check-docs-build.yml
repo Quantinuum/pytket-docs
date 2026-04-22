@@ -8,6 +8,9 @@ on:
     branches:
       - '**'
   workflow_dispatch: {}
+  schedule:
+  # 03:00 every Saturday morning
+    - cron: '0 3 * * 6'
 
 jobs:
   check:
