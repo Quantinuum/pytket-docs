@@ -1587,7 +1587,7 @@ draw(circ)
 The current decomposition method for tableaux is not particularly efficient in terms of gate count, so consider using higher optimisation levels when compiling to help reduce the gate cost.
 ```
 
-The data structure used here for tableaux is intended for compilation use. For fast simulation of Clifford circuits, we recommend using the {py:class}`StimBackend` from `pytket-stim`, the {py:class}`SimplexBackend` from `pytket-pysimplex` (optimized for large sparse circuits), or the {py:class}`~pytket.extensions.qiskit.AerBackend` from `pytket-qiskit`. Future versions of `pytket` may include improved decompositions from tableaux, as well as more flexible tableaux to represent stabilizer states, isometries, and diagonalisation circuits.
+The data structure used here for tableaux is intended for compilation use. For fast simulation of Clifford circuits, we recommend using the {py:class}`StimBackend` from `pytket-stim`, the {py:class}`SimplexBackend` from `pytket-pysimplex` (optimized for large sparse circuits), or the {py:class}`~pytket.extensions.qiskit.backends.aer.AerBackend` from `pytket-qiskit`. Future versions of `pytket` may include improved decompositions from tableaux, as well as more flexible tableaux to represent stabilizer states, isometries, and diagonalisation circuits.
 
 ### Classical and conditional operations
 
@@ -1742,7 +1742,7 @@ Unlike most uses of readouts in `pytket`, register comparisons expect a little-e
 ```{note}
 This feature is only usable on a limited selection of devices and simulators which support conditional gates or classical operations.
 
-The {py:class}`~pytket.extensions.qiskit.AerBackend` (from [pytket-qiskit](inv:pytket-qiskit:std:doc#index)) can support the OpenQasm model,
+The {py:class}`~pytket.extensions.qiskit.backends.aer.AerBackend` (from [pytket-qiskit](inv:pytket-qiskit:std:doc#index)) can support the OpenQasm model,
 where gates can only be conditional on an entire classical register being an
 exact integer value. Bitwise logical operations and register arithmetic are not supported.
 Therefore only conditions of the form

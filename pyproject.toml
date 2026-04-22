@@ -1,30 +1,27 @@
-[tool.poetry]
+[project]
 name = "pytket-docs"
-package-mode = false
 version = "0.1.0"
 description = ""
-authors = ["CalMacCQ <93673602+CalMacCQ@users.noreply.github.com>"]
 readme = "README.md"
+authors = [
+    { name = "CalMacCQ", email = "93673602+CalMacCQ@users.noreply.github.com" }
+]
+requires-python = ">=3.10, <3.14"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-pytket = { extras = ["zx"], version = "^2.11.0" }
-pytket-qiskit = "^0.75.0"
-pytket-cirq = "^0.41.0"
-pytket-qujax = "0.21.0"
-pytest = "^9.0.2"
-ipykernel = "^7.1.0"
-sphinx-copybutton = "^0.5.2"
-quimb = "^1.11.2"
-openfermion = "^1.7.1"
-ipyparallel = "^9.0.2"
-furo = "^2025.9.25"
-myst-nb = "^1.3.0"
-sphinx-autodoc-typehints = "^3.0.1"
-enum-tools = { extras = ["sphinx"], version = "^0.13.0" }
-sphinxcontrib-googleanalytics = "^0.5"
-
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+dependencies = [
+    "pytket[zx]>=2.11.0,<3.0.0",
+    "pytket-qiskit>=0.75.0,<0.76.0",
+    "pytket-cirq>=0.41.0,<0.42.0",
+    "pytket-qujax==0.21.0",
+    "pytest>=9.0.2,<10.0.0",
+    "ipykernel>=7.1.0,<8.0.0",
+    "sphinx-copybutton>=0.5.2,<0.6.0",
+    "quimb>=1.11.2,<2.0.0",
+    "openfermion>=1.7.1,<2.0.0",
+    "ipyparallel>=9.0.2,<10.0.0",
+    "myst-nb>=1.3.0,<2.0.0",
+    "sphinx-autodoc-typehints>=3.0.1,<4.0.0",
+    "enum-tools[sphinx]>=0.13.0,<0.14.0",
+    "sphinxcontrib-googleanalytics>=0.5,<0.6",
+    "quantinuum-sphinx==0.6.0"
+]

@@ -41,7 +41,7 @@ vary over time, a phenomenon commonly referred to as device drift
 [^cite_white2019].
 
 Some devices expose error characterisation information through
-their programming interface. When available, {py:class}`~pytket.backends.Backend`
+their programming interface. When available, {py:class}`~pytket.backends.backend.Backend`
 objects will populate a {py:class}`~pytket.backends.backendinfo.BackendInfo` object with this information.
 
 A {py:class}`~pytket.backends.backendinfo.BackendInfo` object contains a variety of characterisation information supplied by hardware providers.
@@ -69,7 +69,7 @@ node[3]: 0.00015814094160059136,
 node[4]: 0.00013411930305754117}
 ```
 
-Other miscellaneous information, varying between backends, is stored in the `misc` attribute, also accessible through the {py:meth}`~pytket.backends.BackendInfo.get_misc` method.
+Other miscellaneous information, varying between backends, is stored in the `misc` attribute, also accessible through the `BackendInfo.get_misc` method.
 
 
 
@@ -142,7 +142,7 @@ made in both phases, by prioritising edges with lower error rates.
 
 % Noise-Aware placement is effective
 
-The class {py:class}`NoiseAwarePlacement` uses characteristics stored in
+The class {py:class}`~pytket.placement.NoiseAwarePlacement` uses characteristics stored in
 {py:class}`~pytket.backends.backendinfo.BackendInfo` to find an initial placement of logical qubits on
 physical qubits which minimises the error accrued during a circuit's
 execution.  It achieves this by minimising the additional
@@ -202,7 +202,7 @@ q[2] node[2]
 Both placement methods will satisfy the device's connectivity
 constraints, however looking at the device characteristics for
 `ibmq_manila` above,  we see that the placement provided by
-{py:class}`NoiseAwarePlacement` is over a set of qubits with generally
+{py:class}`~pytket.placement.NoiseAwarePlacement` is over a set of qubits with generally
 better error rates.  This will produce a circuit whose output
 statistics are closer to the ideal, noiseless, distribution.
 
@@ -222,9 +222,9 @@ For example, averaging a noise channel over the n-qubit Pauli group has the effe
 
 In this manner, an n-qubit coherent noise channel can be tailored into an n-qubit stochastic Pauli noise channel. For Pauli channels, the worst case error rate is similar to the average error rate, whilst for coherent noise the worst case error rate scales as a square root of the average error rate.
 
-The `pytket` {py:class}`FrameRandomisation` class available in the tailoring module provides methods for using randomised protocols on generic quantum circuits. At a high level, {py:class}`FrameRandomisation` provides methods for identifying n-qubit subcircuits (or cycles) comprised of gates chosen for tailoring in some circuit of choice, and then constructing new circuits for averaging these subcircuits over some ensemble of n-qubit operators (constructed from the Kronecker product of single qubit gates referred to as 'Frame' gates). Tailored counts for a circuit of choice are then produced by running each of the new circuits through a backend with the same number of shots and then combining the returned counts.
+The `pytket` {py:class}`~pytket.tailoring.FrameRandomisation` class available in the tailoring module provides methods for using randomised protocols on generic quantum circuits. At a high level, {py:class}`~pytket.tailoring.FrameRandomisation` provides methods for identifying n-qubit subcircuits (or cycles) comprised of gates chosen for tailoring in some circuit of choice, and then constructing new circuits for averaging these subcircuits over some ensemble of n-qubit operators (constructed from the Kronecker product of single qubit gates referred to as 'Frame' gates). Tailored counts for a circuit of choice are then produced by running each of the new circuits through a backend with the same number of shots and then combining the returned counts.
 
-For each cycle in the circuit, each of the ensemble's operators is prepended to the cycle and a new operator is derived to append to the cycle such that the whole unitary operation is unchanged.  When constructing a {py:class}`FrameRandomisation` object the information required to derive the correct operator to prepend must be provided through a dictionary. An example of this procedure is *randomised compilation* [^cite_wallman2015].
+For each cycle in the circuit, each of the ensemble's operators is prepended to the cycle and a new operator is derived to append to the cycle such that the whole unitary operation is unchanged. When constructing a {py:class}`~pytket.tailoring.FrameRandomisation` object the information required to derive the correct operator to prepend must be provided through a dictionary. An example of this procedure is *randomised compilation* [^cite_wallman2015].
 
 
 ```{code-cell} ipython3
@@ -255,11 +255,11 @@ print(backend.run_circuit(averaging_circuits[0], 100).get_counts())
 
 % preset cycle and frame gates to tailor meaningful noise
 
-Note that the {py:class}`FrameRandomisation` procedure sandwiches each cycle between `OpType.Barrier` operations. This is because frame gates can be combined with adjacent rotation gates to reduce gate overhead, but can not be commuted through their associated cycle as this will undo the framing process. As FrameRandomisation will lead to a blow up in the number of circuits compiled, it is recommended to run FrameRandomisation procedures after circuit optimisation techniques.
+Note that the {py:class}`~pytket.tailoring.FrameRandomisation` procedure sandwiches each cycle between `OpType.Barrier` operations. This is because frame gates can be combined with adjacent rotation gates to reduce gate overhead, but can not be commuted through their associated cycle as this will undo the framing process. As FrameRandomisation will lead to a blow up in the number of circuits compiled, it is recommended to run FrameRandomisation procedures after circuit optimisation techniques.
 
-Running a randomised protocol to achieve meaningful results requires a careful choice of cycle gates and frame gates, which the above example does not make. However, the {py:class}`PauliFrameRandomisation` class is preset with cycle gates {`OpType.CX`, `OpType.H`, `OpType.S`} and frame gates {`OpType.X`, `OpType.Y`, `OpType.Z`, `OpType.noop`} that should.
+Running a randomised protocol to achieve meaningful results requires a careful choice of cycle gates and frame gates, which the above example does not make. However, the {py:class}`~pytket.tailoring.PauliFrameRandomisation` class is preset with cycle gates {`OpType.CX`, `OpType.H`, `OpType.S`} and frame gates {`OpType.X`, `OpType.Y`, `OpType.Z`, `OpType.noop`} that should.
 
-The {py:meth}`PauliFrameRandomisation.get_all_circuits` method returns circuits that tailor the noise of subcircuits comprised of cycle gates into a stochastic Pauli noise when run on a device (given some assumptions, such as additional frame gates not providing additional incoherent noise).
+The {py:meth}`~pytket.tailoring.PauliFrameRandomisation.get_all_circuits` method returns circuits that tailor the noise of subcircuits comprised of cycle gates into a stochastic Pauli noise when run on a device (given some assumptions, such as additional frame gates not providing additional incoherent noise).
 
 
 ```{code-cell} ipython3
@@ -297,7 +297,7 @@ print(pfr_counts)
 print(backend.run_circuit(circ, 50*len(averaging_circuits)).get_counts())
 ```
 
-For a noise free backend, we can see that the same counts distribution is returned as expected. We can use a basic noise model based on a real device to see how a realistic noise channel can change when applying {py:class}`PauliFrameRandomisation`.
+For a noise free backend, we can see that the same counts distribution is returned as expected. We can use a basic noise model based on a real device to see how a realistic noise channel can change when applying {py:class}`~pytket.tailoring.PauliFrameRandomisation`.
 
 
 
@@ -340,9 +340,9 @@ Recombined Noisy Counts using PauliFrameRandomisation: {(0, 1): 203, (0, 0): 215
 
 For this simple case we observe that more shots are returning basis states not in the expected state (though it would be unwise to declare the methods efficacy from this alone).
 
-Given that cycle gates for {py:class}`PauliFrameRandomisation` do not form a universal gate set for the quantum circuit model, randomised protocols using {py:class}`PauliFrameRandomisation` will usually need to individually tailor many cycle instances for a given circuit. This can lead to large circuit overhead required for complete averaging, or a loss of guarantee that the resulting channel is a stochastic Pauli noise when not every frame is used.
+Given that cycle gates for {py:class}`~pytket.tailoring.PauliFrameRandomisation` do not form a universal gate set for the quantum circuit model, randomised protocols using {py:class}`~pytket.tailoring.PauliFrameRandomisation` will usually need to individually tailor many cycle instances for a given circuit. This can lead to large circuit overhead required for complete averaging, or a loss of guarantee that the resulting channel is a stochastic Pauli noise when not every frame is used.
 
-An alternative class, {py:class}`UniversalFrameRandomisation`, is set with cycle gates {`OpType.CX`, `OpType.H`, `OpType.Rz`} and frame gates {`OpType.X`, `OpType.Y`, `OpType.Z`, `OpType.noop`} and so can treat a whole circuit as a single cycle if rebased appropriately. It providers averaging circuits  while preserving the unitary of the circuit by changing the rotation angle of cycle `OpType.Rz` gates when prepending and appending frame gates, meaning that the stochastic Pauli noise property is additionally dependent on incoherent noise not being dependent on the rotation angle.
+An alternative class, {py:class}`~pytket.tailoring.UniversalFrameRandomisation`, is set with cycle gates {`OpType.CX`, `OpType.H`, `OpType.Rz`} and frame gates {`OpType.X`, `OpType.Y`, `OpType.Z`, `OpType.noop`} and so can treat a whole circuit as a single cycle if rebased appropriately. It providers averaging circuits  while preserving the unitary of the circuit by changing the rotation angle of cycle `OpType.Rz` gates when prepending and appending frame gates, meaning that the stochastic Pauli noise property is additionally dependent on incoherent noise not being dependent on the rotation angle.
 
 
 
@@ -393,7 +393,7 @@ Recombined Noisy Counts using UniversalFrameRandomisation: {(0, 1): 208, (0, 0):
 
 Similarly as to the previous case, more shots are returning basis states in the expected state.
 
-We can use {py:class}`AutoRebase`  to create a pass that can be applied to a circuit to rebase its gates to {`OpType.CX`, `OpType.H`, `OpType.Rz`}, the cycle gate primitives for Universal Frame Randomisation.
+We can use {py:meth}`~pytket.passes.AutoRebase` to create a pass that can be applied to a circuit to rebase its gates to {`OpType.CX`, `OpType.H`, `OpType.Rz`}, the cycle gate primitives for Universal Frame Randomisation.
 
 
 ```{code-cell} ipython3
@@ -433,8 +433,8 @@ print('Number of sampled Universal Frame Randomisation averaging circuits with r
 
 ```
 
-By rebasing the circuit Universal Frame Randomisation is being applied to, we can see a significant reduction in the number of averaging circuits required. For large circuits with many cycles {py:meth}`FrameRandomisation.sample_circuits`
-can be used to sample from the full set of averaging circuits. It is recommended to use {py:meth}`FrameRandomisation.sample_circuit` over {py:meth}`FrameRandomisation.get_all_circuits` for larger circuits with many cycles as the overhead in finding frame permutations becomes significant.
+By rebasing the circuit Universal Frame Randomisation is being applied to, we can see a significant reduction in the number of averaging circuits required. For large circuits with many cycles {py:meth}`~pytket.tailoring.FrameRandomisation.sample_circuits`
+can be used to sample from the full set of averaging circuits. It is recommended to use {py:meth}`~pytket.tailoring.FrameRandomisation.sample_circuits` over {py:meth}`~pytket.tailoring.FrameRandomisation.get_all_circuits` for larger circuits with many cycles as the overhead in finding frame permutations becomes significant.
 
 % SPAM Mitigation module and how to use
 
@@ -449,11 +449,11 @@ By repeatedly preparing and measuring a basis state of the device, a distributio
 If this process is repeated for all (or a suitable subset given many qubits won't experience correlated SPAM errors) basis states of a device, a transition matrix can be derived that describes the noisy SPAM process.
 Simply applying the inverse of this transition matrix to the distribution of a quantum state from some desired quantum computation can effectively uncompute the errors caused by SPAM noise.
 
-The {py:class}`SpamCorrecter` provides the required tools for characterising and correcting SPAM noise in this manner. A {py:class}`SpamCorrecter` object is initialised from a partition of a subset of the quantum device's qubits. Qubits are assumed to have SPAM errors which are correlated with that of other qubits in their set, but uncorrelated with the other sets.
+The {py:class}`~pytket.utils.spam.SpamCorrecter` provides the required tools for characterising and correcting SPAM noise in this manner. A {py:class}`~pytket.utils.spam.SpamCorrecter` object is initialised from a partition of a subset of the quantum device's qubits. Qubits are assumed to have SPAM errors which are correlated with that of other qubits in their set, but uncorrelated with the other sets.
 
 As an n-qubit device has $2^n$ basis states, finding the exact noisy SPAM process becomes infeasible for larger devices. However, as correlated errors are typically spatially dependent though, one can usually characterise SPAM noise well by only assuming correlated SPAM noise between nearest-neighbour qubits.
 
-The {py:class}`SpamCorrecter` object uses these subsets of qubits to produce calibration circuits.
+The {py:class}`~pytket.utils.spam.SpamCorrecter` object uses these subsets of qubits to produce calibration circuits.
 
 
 
@@ -487,7 +487,7 @@ Assuming SPAM correlation between all 5 qubits of the "ibmq_quito" device, there
 
 To display the performance of SPAM correction in a controlled environment, we can construct a noise model with measurement errors from `qiskit-aer` and use it to define a simulator backend with known measurement noise.
 
-First the {py:class}`SpamCorrecter` is characterised using counts results for calibration circuits executed through the noisy backend of choice using {py:meth}`SpamCorrecter.calculate_matrices`. Once characterised, noisy counts for a circuit can be corrected using {py:meth}`SpamCorrecter.correct_counts`.
+First the {py:class}`~pytket.utils.spam.SpamCorrecter` is characterised using counts results for calibration circuits executed through the noisy backend of choice using {py:meth}`~pytket.utils.spam.SpamCorrecter.calculate_matrices`. Once characterised, noisy counts for a circuit can be corrected using {py:meth}`~pytket.utils.spam.SpamCorrecter.correct_counts`.
 
 
 ```{code-cell} ipython3
@@ -529,7 +529,7 @@ print('Corrected Counts:', corrected_counts.get_counts())
 print('Noiseless Counts:', noiseless_result.get_counts())
 ```
 
-Despite the presence of additional noise, it is straightforward to see that the corrected counts results are closer to the expected noiseless counts than the original noisy counts. All that is required to use {py:class}`SpamCorrecter` with a real device is the interchange of {py:class}`~pytket.extensions.qiskit.AerBackend` with a real device backend, such as  {py:class}`~pytket.extensions.qiskit.IBMQBackend`.
+Despite the presence of additional noise, it is straightforward to see that the corrected counts results are closer to the expected noiseless counts than the original noisy counts. All that is required to use {py:class}`~pytket.utils.spam.SpamCorrecter` with a real device is the interchange of {py:class}`~pytket.extensions.qiskit.backends.aer.AerBackend` with a real device backend, such as {py:class}`~pytket.extensions.qiskit.backends.ibm.IBMQBackend`.
 
 [^cite_wallman2015]: Wallman, J., Emerson, J., 2015. Noise tailoring for scalable quantum computation via randomized compiling. Phys. Rev. A 94, 052325 (2016).
 

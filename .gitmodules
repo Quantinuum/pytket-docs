@@ -1,4 +1,4 @@
-[submodule "docs/pytket-docs-theming"]
-	path = docs/pytket-docs-theming
+[submodule "sphinx/pytket-docs-theming"]
+	path = sphinx/pytket-docs-theming
 	url = https://github.com/Quantinuum/pytket-docs-theming.git
 	branch = main
