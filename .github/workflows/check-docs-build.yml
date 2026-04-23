@@ -28,7 +28,7 @@ jobs:
           enable-cache: true
           version: "0.10.9"
 
-      - uses: extractions/setup-just@v3
+      - uses: extractions/setup-just@v4
         with:
           just-version: 1.5.0
 
