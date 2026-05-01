@@ -689,7 +689,7 @@ print(circ.n_gates_of_type(OpType.CX))  # But not in this case
 ```
 
 ```{Note}
-{py:obj}`~pytket.passes.FullPeepholeOptimise` takes an optional `allow_swaps` argument. This is a boolean flag to indicate whether {py:obj}`~pytket.passes.FullPeepholeOptimise` should preserve the circuit connectivity or not. If set to `False` the pass will presrve circuit connectivity but the circuit will generally be less optimised than if connectivity was ignored.
+{py:obj}`~pytket.passes.FullPeepholeOptimise` takes an optional `allow_swaps` argument. This is a boolean flag to indicate whether {py:obj}`~pytket.passes.FullPeepholeOptimise` allow the use of implicit swaps or not.
 
 {py:obj}`~pytket.passes.FullPeepholeOptimise` also takes an optional `target_2qb_gate` argument to specify whether to target the {{py:obj}`~pytket.circuit.optype.TK1`, {py:obj}`~pytket.circuit.optype.CX`} or {{py:obj}`~pytket.circuit.optype.TK1`, {py:obj}`~pytket.circuit.optype.TK2`} gateset.
 ```
