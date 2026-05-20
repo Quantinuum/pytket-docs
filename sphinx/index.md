@@ -91,8 +91,6 @@ circuits which look identical may correspond to different unitary
 operations.
 
 Circuit conversion functions are also available for
-[pytket-cirq](inv:pytket-cirq:std:doc#index),
-[pytket-pennylane](inv:pytket-pennylane:std:doc#index),
 [pytket-braket](inv:pytket-braket:std:doc#index)
 and more.
 
