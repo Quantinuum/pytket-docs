@@ -10,7 +10,7 @@ requires-python = ">=3.10, <3.14"
 
 dependencies = [
     "pytket[zx]>=2.11.0,<3.0.0",
-    "pytket-qiskit>=0.75.0,<0.78.0",
+    "pytket-qiskit>=0.75.0,<0.79.0",
     "pytket-cirq>=0.41.0,<0.42.0",
     "pytket-qujax==0.22.0",
     "pytest>=9.0.2,<10.0.0",
