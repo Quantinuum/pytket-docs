@@ -102,7 +102,7 @@ If you spot any bugs or have any feature suggestions, feel free to add to the is
 
 % To open up direct support channels or collaboration with teams, e-mail Denise?
 
-There is a public slack channel for community discussion and support. Click [here](https://join.slack.com/t/tketusers/shared_invite/zt-18qmsamj9-UqQFVdkRzxnXCcKtcarLRA) to join.
+There is a public slack channel for community discussion and support. Click [here](https://join.slack.com/t/tketusers/shared_invite/zt-3a7x4ots2-nZIUpOJ0cSnMM9E~oBm0xQ) to join.
 
 If you would like to open up direct support channels for your team or engage in research collaborations, join our [public slack channel](https://join.slack.com/t/tketusers/shared_invite/zt-3a7x4ots2-nZIUpOJ0cSnMM9E~oBm0xQ). If you have support questions please send them to <mailto:tket-support@quantinuum.com>.
 
