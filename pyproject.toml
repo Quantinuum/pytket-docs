@@ -12,6 +12,7 @@ dependencies = [
     "pytket[zx]>=2.11.0,<3.0.0",
     "pytket-qiskit>=0.75.0",
     "pytket-cirq>=0.41.0",
+    "pytket-qujax>=0.22.0",
     "pytest>=9.0.2,<10.0.0",
     "ipykernel>=7.1.0,<8.0.0",
     "sphinx-copybutton>=0.5.2,<0.6.0",
